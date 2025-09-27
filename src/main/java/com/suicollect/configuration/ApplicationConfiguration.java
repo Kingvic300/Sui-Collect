@@ -50,20 +50,20 @@ public class ApplicationConfiguration {
         return authenticationProvider;
     }
 
-    @Bean
-    public WebMvcConfigurer webMvcConfigurer(){
-        return new WebMvcConfigurer() {
-
-            @Override
-            public void addCorsMappings(@NonNull CorsRegistry corsRegistry){
-                corsRegistry.addMapping("/**")
-                        .allowedOrigins("http://localhost:5173", "https://connectsphere.com")
-                        .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
-                        .allowedHeaders("*")
-                        .allowCredentials(true);
-            }
-        };
-    }
+//    @Bean
+//    public WebMvcConfigurer webMvcConfigurer(){
+//        return new WebMvcConfigurer() {
+//
+//            @Override
+//            public void addCorsMappings(@NonNull CorsRegistry corsRegistry){
+//                corsRegistry.addMapping("/**")
+//                        .allowedOrigins("http://localhost:5173", "https://connectsphere.com")
+//                        .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
+//                        .allowedHeaders("*")
+//                        .allowCredentials(true);
+//            }
+//        };
+//    }
     @Bean
     public JavaMailSender javaMailSender() {
         JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
