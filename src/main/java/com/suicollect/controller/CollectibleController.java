@@ -11,6 +11,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/collectibles")
 @RequiredArgsConstructor
+@CrossOrigin("*")
 public class CollectibleController {
 
     private final CollectibleService collectibleService;

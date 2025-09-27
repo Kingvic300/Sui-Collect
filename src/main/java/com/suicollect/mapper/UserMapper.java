@@ -1,5 +1,6 @@
 package com.suicollect.mapper;
 
+import com.suicollect.data.model.Creator;
 import com.suicollect.data.model.User;
 import com.suicollect.dto.request.CreateUserRequest;
 import com.suicollect.dto.request.UpdateUserProfileRequest;
@@ -92,7 +93,7 @@ public class UserMapper {
         return voiceAuthResponse;
     }
 
-    public static UserWalletResponse mapToUserWalletResponse(String message, User user, String walletAddress, boolean exists) {
+    public static UserWalletResponse mapToUserWalletResponse(String message, Creator user, String walletAddress, boolean exists) {
         UserWalletResponse userWalletResponse = new UserWalletResponse();
         userWalletResponse.setWalletAddress(walletAddress);
         userWalletResponse.setExists(exists);
@@ -101,8 +102,8 @@ public class UserMapper {
         return userWalletResponse;
 
     }
-    public static User mapToUserWalletRegisterResponse(UserWalletRegisterRequest request){
-        User user =  new User();
+    public static Creator mapToUserWalletRegisterResponse(UserWalletRegisterRequest request){
+        Creator user = new Creator();
         user.setName(request.getName());
         user.setUsername(request.getUsername());
         user.setProfession(request.getProfession());
@@ -114,7 +115,7 @@ public class UserMapper {
         user.setSocialTwitter(request.getSocialTwitter());
         return user;
     }
-    public static UserWalletRegisterResponse mapToUserWalletRegistrationResponse(User user, String message){
+    public static UserWalletRegisterResponse mapToUserWalletRegistrationResponse(Creator user, String message){
         UserWalletRegisterResponse response = new UserWalletRegisterResponse();
         response.setUser(user);
         response.setMessage(message);

@@ -4,10 +4,12 @@
     import com.suicollect.dto.request.*;
     import com.suicollect.dto.response.*;
     import lombok.RequiredArgsConstructor;
+    import lombok.extern.slf4j.Slf4j;
     import org.springframework.http.ResponseEntity;
     import org.springframework.web.bind.annotation.*;
     import org.springframework.web.multipart.MultipartFile;
 
+    @Slf4j
     @RestController
     @RequestMapping("/users")
     @RequiredArgsConstructor
@@ -132,6 +134,7 @@
         @PostMapping("/register-wallet")
         public ResponseEntity<UserWalletRegisterResponse> registerWallet(@RequestBody UserWalletRegisterRequest request) {
             UserWalletRegisterResponse response = userService.registerWallet(request);
+            System.out.println("response" + response);
             return ResponseEntity.ok(response);
         }
     }

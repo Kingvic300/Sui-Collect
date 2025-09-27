@@ -2,9 +2,11 @@ package com.suicollect.service;
 
 import com.suicollect.configuration.GoogleTokenVerifier;
 import com.suicollect.data.enums.Role;
+import com.suicollect.data.model.Creator;
 import com.suicollect.data.model.Embedding;
 import com.suicollect.data.model.PendingUser;
 import com.suicollect.data.model.User;
+import com.suicollect.data.repository.CreatorRepository;
 import com.suicollect.data.repository.EmbeddingRepository;
 import com.suicollect.data.repository.PendingUserRepository;
 import com.suicollect.data.repository.UserRepository;
@@ -15,6 +17,7 @@ import com.suicollect.dto.response.*;
 import com.suicollect.exception.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.checkerframework.checker.units.qual.C;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -46,6 +49,7 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepo;
     private final GoogleTokenVerifier verifier;
     private final SessionTokenService tokenService;
+    private final CreatorRepository creatorRepository;
 
     @Override
     public OTPResponse sendVerificationOTP(CreateUserRequest request) {
@@ -477,10 +481,10 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserWalletResponse verifyUsersWallet(UserWalletRequest request) {
-        Optional<User> existingUser = userRepository.findByWalletAddress(request.getWalletAddress());
+        Optional<Creator> existingUser = creatorRepository.findByWalletAddress(request.getWalletAddress());
 
         if (existingUser.isPresent()) {
-            User user = existingUser.get();
+            Creator user = existingUser.get();
             return UserMapper.mapToUserWalletResponse(
                     "Wallet verified successfully",
                     user,
@@ -498,13 +502,15 @@ public class UserServiceImpl implements UserService {
     }
     @Override
     public UserWalletRegisterResponse registerWallet(UserWalletRegisterRequest request){
-        Optional<User> existingUser = userRepository.findByWalletAddress(request.getWalletAddress());
+
+        Optional<Creator> existingUser = creatorRepository.findByWalletAddress(request.getWalletAddress());
         if (existingUser.isPresent()) {
-            User user = existingUser.get();
+            Creator user = existingUser.get();
             return UserMapper.mapToUserWalletRegistrationResponse(user, "Registration Successfully");
         } else {
-            User user = UserMapper.mapToUserWalletRegisterResponse(request);
-            return UserMapper.mapToUserWalletRegistrationResponse(user, "Registration Successfully");
+            Creator user = UserMapper.mapToUserWalletRegisterResponse(request);
+            Creator savedUser = creatorRepository.save(user);
+            return UserMapper.mapToUserWalletRegistrationResponse(savedUser, "Registration Successfully");
         }
     }
 
