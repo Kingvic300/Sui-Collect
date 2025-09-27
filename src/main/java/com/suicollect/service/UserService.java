@@ -41,6 +41,8 @@ public interface UserService {
 
     UserWalletRegisterResponse registerWallet(UserWalletRegisterRequest request);
 
+    GetCreatorResponse getCreatorById(String id);
+
     VoiceAuthResponse verifyVoiceSample(VoiceVerifyRequest request);
 
     ZkLoginResponse zkLogin(ZkLoginRequest request);

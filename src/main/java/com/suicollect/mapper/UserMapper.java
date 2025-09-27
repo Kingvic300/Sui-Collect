@@ -121,5 +121,11 @@ public class UserMapper {
         response.setMessage(message);
         return response;
     }
+    public static GetCreatorResponse mapToGetCreatorResponse(Creator creator, String message){
+        GetCreatorResponse response = new GetCreatorResponse();
+        response.setCreator(creator);
+        response.setMessage(message);
+        return response;
+    }
 
 }

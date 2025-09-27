@@ -17,7 +17,6 @@ import com.suicollect.dto.response.*;
 import com.suicollect.exception.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.checkerframework.checker.units.qual.C;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -513,7 +512,14 @@ public class UserServiceImpl implements UserService {
             return UserMapper.mapToUserWalletRegistrationResponse(savedUser, "Registration Successfully");
         }
     }
-
+    @Override
+    public GetCreatorResponse getCreatorById(String id){
+        Optional<Creator> user = creatorRepository.findById(id);
+        if(user.isEmpty()){
+            throw new UserNotFoundException("User not found with id");
+        }
+        return UserMapper.mapToGetCreatorResponse( user.get(), "User found");
+    }
     @Override
     public VoiceAuthResponse verifyVoiceSample(VoiceVerifyRequest request) {
         Optional<User> existingUser = userRepository.findByEmail(request.getEmail());

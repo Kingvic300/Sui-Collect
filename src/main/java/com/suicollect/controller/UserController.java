@@ -137,5 +137,10 @@
             System.out.println("response" + response);
             return ResponseEntity.ok(response);
         }
+        @GetMapping("/creator/{id}")
+        public ResponseEntity<GetCreatorResponse> getCreatorById(@PathVariable String id) {
+            GetCreatorResponse response = userService.getCreatorById(id);
+            return ResponseEntity.ok(response);
+        }
     }
 
