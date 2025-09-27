@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class UserWalletResponse {
     private String message;
-    private String userId;
+    private User user;
     private String walletAddress;
     private boolean exists;
 }

@@ -92,12 +92,12 @@ public class UserMapper {
         return voiceAuthResponse;
     }
 
-    public static UserWalletResponse mapToUserWalletResponse(String message, String id, String walletAddress, boolean exists) {
+    public static UserWalletResponse mapToUserWalletResponse(String message, User user, String walletAddress, boolean exists) {
         UserWalletResponse userWalletResponse = new UserWalletResponse();
         userWalletResponse.setWalletAddress(walletAddress);
         userWalletResponse.setExists(exists);
         userWalletResponse.setMessage(message);
-        userWalletResponse.setUserId(id);
+        userWalletResponse.setUser(user);
         return userWalletResponse;
 
     }

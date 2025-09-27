@@ -483,7 +483,7 @@ public class UserServiceImpl implements UserService {
             User user = existingUser.get();
             return UserMapper.mapToUserWalletResponse(
                     "Wallet verified successfully",
-                    user.getId(),
+                    user,
                     user.getWalletAddress(),
                     true
             );
