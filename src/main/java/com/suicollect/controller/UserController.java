@@ -123,4 +123,15 @@
             ZkLoginResponse response = userService.zkLogin(request);
             return ResponseEntity.ok(response);
         }
+        @PostMapping("/verify-wallet")
+        public ResponseEntity<UserWalletResponse> verifyUsersWallet(@RequestBody UserWalletRequest request) {
+            UserWalletResponse response = userService.verifyUsersWallet(request);
+            return ResponseEntity.ok(response);
+        }
+        @PostMapping("/register-wallet")
+        public ResponseEntity<UserWalletRegisterResponse> registerWallet(@RequestBody UserWalletRegisterRequest request) {
+            UserWalletRegisterResponse response = userService.registerWallet(request);
+            return ResponseEntity.ok(response);
+        }
     }
+

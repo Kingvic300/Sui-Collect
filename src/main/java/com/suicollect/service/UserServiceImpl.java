@@ -440,7 +440,7 @@ public class UserServiceImpl implements UserService {
                 u.setName(name);
                 u.setEmail(email);
                 u.setPicture(picture);
-                u.setSuiAddress("todo-sui-address");
+                u.setWalletAddress("todo-sui-address");
                 u.setEncryptedSuiPrivateKey("todo-encrypted");
                 return u;
             });
@@ -453,7 +453,7 @@ public class UserServiceImpl implements UserService {
             return new ZkLoginResponse(
                     true,
                     sessionToken,
-                    new UserProfileDto(user.getId(), user.getSuiAddress(), user.getName(), user.getEmail(), user.getPicture()),
+                    new UserProfileDto(user.getId(), user.getWalletAddress(), user.getName(), user.getEmail(), user.getPicture()),
                     null
             );
         } catch (Exception e) {
@@ -473,6 +473,39 @@ public class UserServiceImpl implements UserService {
         user.setUpdatedAt(LocalDateTime.now());
 
         userRepository.save(user);
+    }
+
+    @Override
+    public UserWalletResponse verifyUsersWallet(UserWalletRequest request) {
+        Optional<User> existingUser = userRepository.findByWalletAddress(request.getWalletAddress());
+
+        if (existingUser.isPresent()) {
+            User user = existingUser.get();
+            return UserMapper.mapToUserWalletResponse(
+                    "Wallet verified successfully",
+                    user.getId(),
+                    user.getWalletAddress(),
+                    true
+            );
+        } else {
+            return UserMapper.mapToUserWalletResponse(
+                    "Wallet not found, please sign up",
+                    null,
+                    request.getWalletAddress(),
+                    false
+            );
+        }
+    }
+    @Override
+    public UserWalletRegisterResponse registerWallet(UserWalletRegisterRequest request){
+        Optional<User> existingUser = userRepository.findByWalletAddress(request.getWalletAddress());
+        if (existingUser.isPresent()) {
+            User user = existingUser.get();
+            return UserMapper.mapToUserWalletRegistrationResponse(user, "Registration Successfully");
+        } else {
+            User user = UserMapper.mapToUserWalletRegisterResponse(request);
+            return UserMapper.mapToUserWalletRegistrationResponse(user, "Registration Successfully");
+        }
     }
 
     @Override

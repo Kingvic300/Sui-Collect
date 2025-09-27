@@ -25,7 +25,7 @@ public class User implements UserDetails {
     private String id;
     private String firstName;
     private String email;
-    private String suiAddress;
+    private String walletAddress;
     private String authProviderId;
     private String authProvider;
     private String picture;
@@ -43,6 +43,13 @@ public class User implements UserDetails {
     private LocalDateTime lastLoginDate;
     private LocalDateTime lastLogoutDate;
     private LocalDateTime updatedAt;
+    private String username;
+    private String profession;
+    private String bio;
+    private String socialTwitter;
+    private String socialDiscord;
+    private String socialWebsite;
+
     private boolean isActive;
 
     private Role role;

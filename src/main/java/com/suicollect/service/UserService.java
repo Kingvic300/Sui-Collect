@@ -37,6 +37,10 @@ public interface UserService {
 
     VoiceAuthResponse enrollVoiceSample(VoiceEnrollRequest request);
 
+    UserWalletResponse verifyUsersWallet(UserWalletRequest request);
+
+    UserWalletRegisterResponse registerWallet(UserWalletRegisterRequest request);
+
     VoiceAuthResponse verifyVoiceSample(VoiceVerifyRequest request);
 
     ZkLoginResponse zkLogin(ZkLoginRequest request);

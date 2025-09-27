@@ -3,6 +3,7 @@ package com.suicollect.mapper;
 import com.suicollect.data.model.User;
 import com.suicollect.dto.request.CreateUserRequest;
 import com.suicollect.dto.request.UpdateUserProfileRequest;
+import com.suicollect.dto.request.UserWalletRegisterRequest;
 import com.suicollect.util.EmailVerification;
 import com.suicollect.dto.response.*;
 
@@ -90,4 +91,34 @@ public class UserMapper {
         voiceAuthResponse.setMessage(message);
         return voiceAuthResponse;
     }
+
+    public static UserWalletResponse mapToUserWalletResponse(String message, String id, String walletAddress, boolean exists) {
+        UserWalletResponse userWalletResponse = new UserWalletResponse();
+        userWalletResponse.setWalletAddress(walletAddress);
+        userWalletResponse.setExists(exists);
+        userWalletResponse.setMessage(message);
+        userWalletResponse.setUserId(id);
+        return userWalletResponse;
+
+    }
+    public static User mapToUserWalletRegisterResponse(UserWalletRegisterRequest request){
+        User user =  new User();
+        user.setName(request.getName());
+        user.setUsername(request.getUsername());
+        user.setProfession(request.getProfession());
+        user.setWalletAddress(request.getWalletAddress());
+        user.setEmail(request.getEmail());
+        user.setBio(request.getBio());
+        user.setSocialDiscord(request.getSocialDiscord());
+        user.setSocialWebsite(request.getSocialWebsite());
+        user.setSocialTwitter(request.getSocialTwitter());
+        return user;
+    }
+    public static UserWalletRegisterResponse mapToUserWalletRegistrationResponse(User user, String message){
+        UserWalletRegisterResponse response = new UserWalletRegisterResponse();
+        response.setUser(user);
+        response.setMessage(message);
+        return response;
+    }
+
 }
